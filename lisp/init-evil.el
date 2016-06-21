@@ -328,6 +328,10 @@ If the character before and after CH is space or tab, CH is NOT slash"
 (define-key evil-normal-state-map (kbd "C-]") 'etags-select-find-tag-at-point)
 (define-key evil-visual-state-map (kbd "C-]") 'etags-select-find-tag-at-point)
 
+(define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-p") 'previous-line)
+(define-key evil-insert-state-map (kbd "C-n") 'next-line)
+
 (require 'evil-numbers)
 (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
@@ -597,7 +601,32 @@ If the character before and after CH is space or tab, CH is NOT slash"
        "us" 'gud-step
        "ui" 'gud-stepi
        "uc" 'gud-cont
-       "uf" 'gud-finish)
+       "uf" 'gud-finish
+
+        ;;GNU Global
+        "gt" 'ggtags-find-tag-dwim
+        "gr" 'ggtags-find-reference
+        ;;Debug
+        ;; "dd" 'my-gud-gdb
+        ;; "dk" 'gud-kill-yes
+        ;; "dr" 'gud-remove
+        ;; "db" 'gud-break
+        ;; "du" 'gud-run
+        ;; "dp" 'gud-print
+        ;; "de" 'gud-cls
+        ;; "dn" 'gud-next
+        ;; "ds" 'gud-step
+        ;; "di" 'gud-stepi
+        ;; "dc" 'gud-cont
+        ;; "df" 'gud-finish
+        ;; "dc" 'compile  ;; Mine chenpeng 20160519
+        ;; "dg" 'gdb
+        ;; "dw" 'gdb-many-windows
+
+        ;;Explore
+        "ep" 'previous-buffer
+        "en" 'next-buffer
+        "ef" 'evil-show-file-info)
 
 ;; per-major-mode leader setup
 (general-define-key :states '(normal motion insert emacs)
