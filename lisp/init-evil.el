@@ -590,38 +590,39 @@ If the character before and after CH is space or tab, CH is NOT slash"
        "gs" 'git-gutter:set-start-revision
        "gh" 'git-gutter-reset-to-head-parent
        "gr" 'git-gutter-reset-to-default
-       "ud" 'my-gud-gdb
-       "uk" 'gud-kill-yes
-       "ur" 'gud-remove
-       "ub" 'gud-break
-       "uu" 'gud-run
-       "up" 'gud-print
-       "ue" 'gud-cls
-       "un" 'gud-next
-       "us" 'gud-step
-       "ui" 'gud-stepi
-       "uc" 'gud-cont
-       "uf" 'gud-finish
+
+       ;; "ud" 'my-gud-gdb
+       ;; "uk" 'gud-kill-yes
+       ;; "ur" 'gud-remove
+       ;; "ub" 'gud-break
+       ;; "uu" 'gud-run
+       ;; "up" 'gud-print
+       ;; "ue" 'gud-cls
+       ;; "un" 'gud-next
+       ;; "us" 'gud-step
+       ;; "ui" 'gud-stepi
+       ;; "uc" 'gud-cont
+       ;; "uf" 'gud-finish
 
         ;;GNU Global
         "gt" 'ggtags-find-tag-dwim
         "gr" 'ggtags-find-reference
         ;;Debug
-        ;; "dd" 'my-gud-gdb
-        ;; "dk" 'gud-kill-yes
-        ;; "dr" 'gud-remove
-        ;; "db" 'gud-break
-        ;; "du" 'gud-run
-        ;; "dp" 'gud-print
-        ;; "de" 'gud-cls
-        ;; "dn" 'gud-next
-        ;; "ds" 'gud-step
-        ;; "di" 'gud-stepi
-        ;; "dc" 'gud-cont
-        ;; "df" 'gud-finish
-        ;; "dc" 'compile  ;; Mine chenpeng 20160519
-        ;; "dg" 'gdb
-        ;; "dw" 'gdb-many-windows
+        "dd" 'my-gud-gdb
+        "dk" 'gud-kill-yes
+        "dr" 'gud-remove
+        "db" 'gud-break
+        "du" 'gud-run
+        "dp" 'gud-print
+        "de" 'gud-cls
+        "dn" 'gud-next
+        "ds" 'gud-step
+        "di" 'gud-stepi
+        "dc" 'gud-cont
+        "df" 'gud-finish
+        "dc" 'compile  ;; Mine chenpeng 20160519
+        "dg" 'gdb
+        "dw" 'gdb-many-windows
 
         ;;Explore
         "ep" 'previous-buffer
