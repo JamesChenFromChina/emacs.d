@@ -101,7 +101,7 @@
   (require 'init-bbdb)
   (require 'init-gnus)
   (require 'init-lua-mode)
-  (require 'init-workgroups2)
+  ;;(require 'init-workgroups2)
   (require 'init-term-mode)
   (require 'init-web-mode)
   (require 'init-slime)
