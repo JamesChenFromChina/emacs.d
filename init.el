@@ -123,6 +123,11 @@
   (require 'init-emacs-w3m)
   (require 'init-hydra)
 
+
+
+  ;;add by JamesChen
+  (require 'init-xcscope)
+
   ;; {{ idle require other stuff
   (setq idle-require-idle-delay 3)
   (setq idle-require-symbols '(init-misc-lazy
