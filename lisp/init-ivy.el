@@ -1,3 +1,6 @@
+(autoload 'ivy-recentf "ivy" "" t)
+(autoload 'ivy-read "ivy")
+
 (defvar counsel-process-filename-string nil
   "Give you a chance to change file name string for other counsel-* functions")
 ;; {{ @see http://oremacs.com/2015/04/19/git-grep-ivy/
@@ -27,7 +30,7 @@ Yank the file name at the same time.  FILTER is function to filter the collectio
         (default-directory (locate-dominating-file
                             default-directory ".git"))
         keyword
-        collection val lst)
+        collection)
 
     ;; insert base file name into kill ring is possible
     (kill-new (if counsel-process-filename-string
@@ -45,11 +48,14 @@ Yank the file name at the same time.  FILTER is function to filter the collectio
                                    "\n"
                                    t))
     (if filter (setq collection (funcall filter collection)))
-
-    (when (and collection (> (length collection) 0))
-      (setq val (if (= 1 (length collection)) (car collection)
-                    (ivy-read (if no-keyword hint (format "matching \"%s\":" keyword)) collection)))
-      (funcall fn open-another-window val))))
+    (cond
+     ((and collection (= (length collection) 1))
+      (funcall fn open-another-window (car collection)))
+     (t
+      (ivy-read (if no-keyword hint (format "matching \"%s\":" keyword))
+                collection
+                :action (lambda (val)
+                          (funcall fn open-another-window val)))))))
 
 (defun counsel--open-grepped-file (open-another-window val)
   (let* ((lst (split-string val ":"))
@@ -62,7 +68,7 @@ Yank the file name at the same time.  FILTER is function to filter the collectio
       (goto-char (point-min))
       (forward-line (1- linenum)))))
 
-(defun counsel-git-grep (&optional open-another-window)
+(defun counsel-git-grep-in-project (&optional open-another-window)
   "Grep in the current git repository.
 If OPEN-ANOTHER-WINDOW is not nil, results are displayed in new window."
   (interactive "P")
@@ -228,7 +234,7 @@ Or else, find files since 24 weeks (6 months) ago."
                           )))))
 
 (defun counsel-imenu-goto ()
-  "Go to buffer position"
+  "Imenu based on ivy-mode."
   (interactive)
   (unless (featurep 'imenu)
     (require 'imenu nil t))
@@ -308,13 +314,11 @@ Or else, find files since 24 weeks (6 months) ago."
                            (insert-file-contents (file-truename "~/.bash_history"))
                            (buffer-string))
                          "\n"
-                         t)))
-         val)
-    (when (and collection (> (length collection) 0)
-               (setq val (if (= 1 (length collection)) (car collection)
-                           (ivy-read (format "Bash history:") collection))))
-      (kill-new val)
-      (message "%s => kill-ring" val))))
+                         t))))
+      (ivy-read (format "Bash history:") collection
+                :action (lambda (val))
+                (kill-new val)
+                (message "%s => kill-ring" val))))
 
 (defun counsel-git-show-hash-diff-mode (hash)
   (let ((show-cmd (format "git --no-pager show --no-color %s" hash)))

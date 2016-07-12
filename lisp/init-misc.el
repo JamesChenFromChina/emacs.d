@@ -170,7 +170,7 @@
   (interactive)
   (dictionary-new-search (cons (if (region-active-p)
                                    (buffer-substring-no-properties (region-beginning) (region-end))
-                                 (thing-at-point 'symbol)) dictionary-default-dictionary)))
+                                 (read-string "Input word for dict.org:")) dictionary-default-dictionary)))
 
 ;; }}
 
@@ -423,10 +423,15 @@ See \"Reusing passwords for several connections\" from INFO.
                         "/GTAGS$"
                         "/GRAGS$"
                         "/GPATH$"
+                        ;; binary
                         "\\.mkv$"
                         "\\.mp[34]$"
                         "\\.avi$"
                         "\\.pdf$"
+                        ;; sub-titles
+                        "\\.sub$"
+                        "\\.srt$"
+                        "\\.ass$"
                         ;; ~/.emacs.d/**/*.el included
                         ;; "/home/[a-z]\+/\\.[a-df-z]" ; configuration file should not be excluded
                         ))
@@ -436,7 +441,13 @@ See \"Reusing passwords for several connections\" from INFO.
 (autoload 'which-function "which-func")
 (autoload 'popup-tip "popup")
 
+(defun my-which-file ()
+  "Return current file name for Yasnippets."
+  (if (buffer-file-name) (format "%s:" (file-name-nondirectory (buffer-file-name)))
+    ""))
+
 (defun my-which-function ()
+  "Return current function name."
   ;; clean the imenu cache
   ;; @see http://stackoverflow.com/questions/13426564/how-to-force-a-rescan-in-imenu-by-a-function
   (setq imenu--index-alist nil)
@@ -524,15 +535,6 @@ See \"Reusing passwords for several connections\" from INFO.
           (setq rlt t)))
     rlt))
 
-;; {{ tramp setup
-(add-to-list 'backup-directory-alist
-             (cons tramp-file-name-regexp nil))
-(setq tramp-chunksize 8192)
-
-;; @see https://github.com/syl20bnr/spacemacs/issues/1921
-;; If you tramp is hanging, you can uncomment below line.
-;; (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-;; }}
 
 ;; {{
 (defun goto-edge-by-comparing-font-face (&optional step)
@@ -557,15 +559,12 @@ If step is -1, go backward."
 ;; }}
 
 (defun my-minibuffer-setup-hook ()
-  ;; Use paredit in the minibuffer
-  (conditionally-paredit-mode 1)
   (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
   (local-set-key (kbd "C-k") 'kill-line)
   (setq gc-cons-threshold most-positive-fixnum))
 
 (defun my-minibuffer-exit-hook ()
   ;; evil-mode also use minibuf
-  (conditionally-paredit-mode -1)
   (setq gc-cons-threshold best-gc-cons-threshold))
 
 ;; @see http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
@@ -684,6 +683,12 @@ If step is -1, go backward."
 ;; fastdef.el
 (autoload 'fastdef-insert "fastdef" nil t)
 (autoload 'fastdef-insert-from-history "fastdef" nil t)
+
+;; indention management
+(defun my-toggle-indentation ()
+  (interactive)
+  (setq indent-tabs-mode (not indent-tabs-mode))
+  (message "indent-tabs-mode=%s" indent-tabs-mode))
 
 ;; {{ auto-save.el
 (require 'auto-save)

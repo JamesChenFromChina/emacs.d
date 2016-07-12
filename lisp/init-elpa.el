@@ -8,7 +8,8 @@ But you may use safer HTTPS instead.")
 ;; List of VISIBLE packages from melpa-unstable (http://melpa.org)
 ;; Feel free to add more packages!
 (defvar melpa-include-packages
-  '(bbdb
+  '(ace-mc
+    bbdb
     color-theme
     wgrep
     robe
@@ -50,6 +51,7 @@ But you may use safer HTTPS instead.")
     textile-mode
     w3m
     erlang
+    workgroups2
     company-c-headers)
   "Don't install any Melpa packages except these packages")
 
@@ -127,13 +129,10 @@ ARCHIVE is the string name of the package archive.")
 ;; Don't take Melpa versions of certain packages
 (setq package-filter-function
       (lambda (package version archive)
-        (and
-         (not (memq package '(eieio)))
-         (or (not (string-equal archive "melpa"))
-             (memq package melpa-include-packages)
-             ;; use all color themes
-             (string-match (format "%s" package) "-theme"))
-         )))
+        (or (not (string-equal archive "melpa"))
+            (memq package melpa-include-packages)
+            ;; use all color themes
+            (string-match (format "%s" package) "-theme"))))
 
 ;; un-comment below code if you prefer use all the package on melpa (unstable) without limitation
 ;; (setq package-filter-function nil)
@@ -144,6 +143,7 @@ ARCHIVE is the string name of the package archive.")
 
 (package-initialize)
 
+(require-package 'async)
 (require-package 'dash) ; required by string-edit
 ; color-theme 6.6.1 in elpa is buggy
 (require-package 'color-theme)
