@@ -627,7 +627,17 @@ If the character before and after CH is space or tab, CH is NOT slash"
         ;;Explore
         "ep" 'previous-buffer
         "en" 'next-buffer
-        "ef" 'evil-show-file-info)
+        "ef" 'evil-show-file-info
+
+        ;;Format
+        "fi" 'indent-region
+        "fdf" 'doxygen-insert-function-comment
+        "fdd" 'doxygen-insert-file-comment
+        "fdm" 'doxygen-insert-member-group-region
+        "fdc" 'doxygen-insert-compound-comment
+        )
+
+
 
 ;; per-major-mode leader setup
 (general-define-key :states '(normal motion insert emacs)
