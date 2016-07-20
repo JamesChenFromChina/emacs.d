@@ -97,6 +97,12 @@
   ;; init-evil dependent on init-clipboard
   (require 'init-clipboard)
   ;; use evil mode (vi key binding)
+
+  ;;JamesChen
+  (require 'init-xcscope)
+  (require 'init-helm)
+
+  ;;Evil
   (require 'init-evil)
   (require 'init-sh)
   (require 'init-ctags)
@@ -124,10 +130,6 @@
   (require 'init-emacs-w3m)
   (require 'init-hydra)
 
-
-
-  ;;add by JamesChen
-  (require 'init-xcscope)
 
   ;; {{ idle require other stuff
   (setq idle-require-idle-delay 3)
