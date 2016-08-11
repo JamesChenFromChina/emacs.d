@@ -650,6 +650,7 @@ If the character before and after CH is space or tab, CH is NOT slash"
         "ef" 'evil-show-file-info
         "el" 'helm-imenu
         "eip" 'find-file-in-project
+        "es" 'helm-semantic-or-imenu
         ;;Format
         "fi" 'indent-region
         "fdf" 'doxygen-insert-function-comment
