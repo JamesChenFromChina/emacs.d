@@ -101,7 +101,7 @@
   ;;JamesChen
   (require 'init-xcscope)
   (require 'init-helm)
-
+  
   ;;Evil
   (require 'init-evil)
   (require 'init-sh)
