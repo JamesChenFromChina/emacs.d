@@ -72,7 +72,7 @@ But you may use safer HTTPS instead.")
                              ;("marmalade" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/")
                              ;("org" . " http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
                              ))
-  
+
   ;;a mirror
     ;; (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
     ;;                      ("melpa" . "http://elpa.zilongshanren.com/melpa/")))
