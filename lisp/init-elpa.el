@@ -146,7 +146,7 @@ ARCHIVE is the string name of the package archive.")
         (or (not (string-equal archive "melpa"))
             (memq package melpa-include-packages)
             ;; use all color themes
-            t
+            t  ;;uncomment to disable filter
             (string-match (format "%s" package) "-theme"))))
 
 ;; un-comment below code if you prefer use all the package on melpa (unstable) without limitation
